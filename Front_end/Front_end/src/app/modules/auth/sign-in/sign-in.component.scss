@@ -1,0 +1,263 @@
+// Hardware Store Sign-In Page Styles
+
+* {
+  box-sizing: border-box;
+}
+
+.signin-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5e6d3 0%, #e8d5b7 50%, #d4c4a8 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.signin-wrapper {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+}
+
+// Header
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.tool-icon {
+  font-size: 2.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #8b6f47;
+  margin: 0;
+  font-weight: 600;
+}
+
+.welcome-text {
+  color: #6b5d4f;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+// Form
+.signin-form {
+  width: 100%;
+}
+
+// Error Message Box
+.error-message-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #c85a5a;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-icon {
+  font-size: 1.1rem;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  color: #5a4a3a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+// Password Header with Forgot Link
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.forgot-password-link {
+  color: #b8860b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #8b6f47;
+    text-decoration: underline;
+  }
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d4c4a8;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #3a3a3a;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #b8860b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+.form-input.error {
+  border-color: #c85a5a;
+  background: #fff5f5;
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+// Error Messages
+.error-text {
+  display: block;
+  color: #c85a5a;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+// Checkbox
+.checkbox-field {
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  margin-top: 0.25rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #b8860b;
+}
+
+.checkbox-text {
+  color: #5a4a3a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+// Links
+.link {
+  color: #b8860b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #8b6f47;
+  text-decoration: underline;
+}
+
+// Submit Button
+.submit-btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: #b8860b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  margin-bottom: 1.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #a0750a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+// Sign Up Link
+.signup-link {
+  text-align: center;
+  color: #6b5d4f;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .signin-container {
+    padding: 1rem;
+  }
+
+  .signin-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .tool-icon {
+    font-size: 2rem;
+  }
+
+  .password-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+

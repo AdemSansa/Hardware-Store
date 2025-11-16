@@ -1,0 +1,48 @@
+<div class="verify-container">
+  <div class="verify-wrapper">
+    <!-- Loading State -->
+    @if (isLoading) {
+      <div class="status-content">
+        <div class="icon-container loading">
+          <div class="spinner"></div>
+        </div>
+        <h1>Verifying your email...</h1>
+        <p>Please wait while we verify your email address.</p>
+      </div>
+    }
+
+    <!-- Success State -->
+    @if (isSuccess && !isLoading) {
+      <div class="status-content">
+        <div class="icon-container success">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h1>Email Verified Successfully!</h1>
+        <p>Your email address has been verified. You can now sign in to your account.</p>
+        <button class="action-btn" (click)="goToSignIn()">Go to Sign In</button>
+      </div>
+    }
+
+    <!-- Error State -->
+    @if (isError && !isLoading) {
+      <div class="status-content">
+        <div class="icon-container error">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1>Verification Failed</h1>
+        <p>{{ errorMessage }}</p>
+        <div class="error-actions">
+          <button class="action-btn" (click)="goToSignIn()">Go to Sign In</button>
+          <button class="action-btn secondary" (click)="goToSignUp()">Sign Up Again</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
