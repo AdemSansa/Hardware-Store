@@ -12,6 +12,8 @@ const userSchema = new mongoose.Schema({
   passwordResetToken: String,
   passwordResetExpires: Date,
   verifyEmailToken: String,
+  isOnline: { type: Boolean, default: false },
+  lastOnline: { type: Date, default: Date.now },
 }, { timestamps: true });
 
 

@@ -3,6 +3,7 @@ const User = require('../user/user.schema');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../utils/tokens');
 const { validationResult } = require('express-validator');
 const sendEmail = require('../../utils/email'); // simple nodemailer helper
+const { markUserOnline, markUserOffline } = require('../../services/statusTracker');
 
 
 
@@ -129,7 +130,7 @@ const login = async (req, res) => {
           return res.status(403).json({ message: 'Please verify your email first' });
         }
     
-        const payload = { sub: user._id.toString(), roles: user.roles };
+        const payload = { sub: user._id.toString(), roles: user.roles , raw: user};
     
         const accessToken = signAccessToken(payload);
         const refreshToken = signRefreshToken(payload);
@@ -145,6 +146,9 @@ const login = async (req, res) => {
           sameSite: 'strict',
           maxAge: 1000 * 60 * 60 * 24 * 7, // 7d
         });
+    
+        // Mark user as online
+        await markUserOnline(user._id.toString());
     
         res.json({ accessToken, expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN });
       } catch (err) {
@@ -209,6 +213,8 @@ const logout = async (req, res) => {
       if (user) {
         user.refreshTokens = user.refreshTokens.filter(rt => rt.token !== token);
         await user.save();
+        // Mark user as offline
+        await markUserOffline(user._id.toString());
       }
       res.clearCookie('refreshToken');
       res.status(204).send();

@@ -1,0 +1,152 @@
+<div class="user-form-container">
+  <div class="user-form-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="title-section">
+        <span class="tool-icon">🔧</span>
+        <h1>{{ isEditMode ? 'Edit User' : 'Create New User' }}</h1>
+      </div>
+      <button class="back-btn" (click)="cancel()">← Back to List</button>
+    </div>
+
+    <!-- Success Message -->
+    @if (successMessage) {
+      <div class="success-message-box">
+        <span class="success-icon">✓</span>
+        <span>{{ successMessage }}</span>
+      </div>
+    }
+
+    <!-- Error Message -->
+    @if (errorMessage) {
+      <div class="error-message-box">
+        <span class="error-icon">⚠️</span>
+        <span>{{ errorMessage }}</span>
+      </div>
+    }
+
+    <!-- Loading State -->
+    @if (isLoading && isEditMode) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading user...</p>
+      </div>
+    }
+
+    <!-- Form -->
+    @if (!isLoading || !isEditMode) {
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+        <!-- Name -->
+        <div class="form-field">
+          <label for="name">Full Name *</label>
+          <input 
+            type="text" 
+            id="name"
+            formControlName="name"
+            class="form-input"
+            [class.error]="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+            placeholder="Enter full name">
+          @if (userForm.get('name')?.invalid && userForm.get('name')?.touched) {
+            <span class="error-text">
+              @if (userForm.get('name')?.errors?.['required']) {
+                Name is required
+              }
+              @if (userForm.get('name')?.errors?.['minlength']) {
+                Name must be at least 3 characters
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="form-field">
+          <label for="email">Email Address *</label>
+          <input 
+            type="email" 
+            id="email"
+            formControlName="email"
+            class="form-input"
+            [class.error]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+            placeholder="Enter email address">
+          @if (userForm.get('email')?.invalid && userForm.get('email')?.touched) {
+            <span class="error-text">
+              @if (userForm.get('email')?.errors?.['required']) {
+                Email is required
+              }
+              @if (userForm.get('email')?.errors?.['email']) {
+                Please enter a valid email
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="form-field">
+          <label for="password">
+            Password {{ isEditMode ? '(leave blank to keep current)' : '*' }}
+          </label>
+          <input 
+            type="password" 
+            id="password"
+            formControlName="password"
+            class="form-input"
+            [class.error]="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+            placeholder="Enter password">
+          @if (userForm.get('password')?.value) {
+            <div class="password-strength">
+              <div class="strength-bar" [class]="getPasswordStrength()"></div>
+            </div>
+          }
+          @if (userForm.get('password')?.invalid && userForm.get('password')?.touched) {
+            <span class="error-text">
+              @if (userForm.get('password')?.errors?.['required']) {
+                Password is required
+              }
+              @if (userForm.get('password')?.errors?.['minlength']) {
+                Password must be at least 8 characters
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Confirm Password -->
+        @if (!isEditMode || userForm.get('password')?.value) {
+          <div class="form-field">
+            <label for="confirmPassword">Confirm Password {{ isEditMode ? '' : '*' }}</label>
+            <input 
+              type="password" 
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-input"
+              [class.error]="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched"
+              placeholder="Confirm password">
+            @if (userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched) {
+              <span class="error-text">
+                @if (userForm.get('confirmPassword')?.errors?.['required']) {
+                  Please confirm your password
+                }
+                @if (userForm.get('confirmPassword')?.errors?.['passwordMismatch']) {
+                  Passwords do not match
+                }
+              </span>
+            }
+          </div>
+        }
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="cancel()">Cancel</button>
+          <button type="submit" class="btn-primary" [disabled]="userForm.invalid || isLoading">
+            @if (!isLoading) {
+              {{ isEditMode ? 'Update User' : 'Create User' }}
+            }
+            @if (isLoading) {
+              {{ isEditMode ? 'Updating...' : 'Creating...' }}
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
+

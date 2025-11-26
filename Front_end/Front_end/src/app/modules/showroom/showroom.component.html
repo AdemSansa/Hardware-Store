@@ -1,0 +1,102 @@
+<div class="showroom-container">
+  <header class="showroom-header">
+    <div class="branding">
+      <span class="tool-icon">🏬</span>
+      <div>
+        <h1>Product Showroom</h1>
+        <p>Discover our latest hardware products, curated for you.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search by name, description, or SKU..."
+          [value]="searchTerm"
+          (input)="onSearchChange($any($event.target).value)" />
+      </div>
+
+      <div class="category-filter">
+        <label for="category">Category</label>
+        <select
+          id="category"
+          [value]="selectedCategory"
+          (change)="onCategoryChange($any($event.target).value)">
+          <option value="all">All</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </header>
+
+  @if (errorMessage) {
+    <div class="error-banner">
+      <span>⚠️</span>
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  @if (isLoading) {
+    <div class="loading-section">
+      <div class="spinner"></div>
+      <p>Loading showroom...</p>
+    </div>
+  }
+
+  @if (!isLoading) {
+    @if (filteredProducts.length === 0) {
+      <div class="empty-section">
+        <span class="empty-icon">🔍</span>
+        <h2>No products found</h2>
+        <p>Try adjusting your search or filters to see more products.</p>
+      </div>
+    } @else {
+      <section class="product-grid">
+        @for (product of filteredProducts; track product._id) {
+          <article class="product-card">
+            <div class="card-header">
+              <h3>{{ product.name }}</h3>
+              @if (product.category) {
+                <span class="category-pill">{{ product.category }}</span>
+              }
+            </div>
+            <p class="description">
+              {{ product.description || 'No description available yet.' }}
+            </p>
+
+            <div class="card-meta">
+              <div class="price">
+                <span class="label">Price</span>
+                <span class="value">{{ formatPrice(product.price) }}</span>
+              </div>
+              <div class="stock" [class.low]="product.stock <= 5">
+                <span class="label">Stock</span>
+                <span class="value">
+                  @if (product.stock > 0) {
+                    {{ product.stock }} in stock
+                  } @else {
+                    Out of stock
+                  }
+                </span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              @if (product.sku) {
+                <span class="sku">SKU: {{ product.sku }}</span>
+              }
+              <button class="cta-btn" type="button">
+                Request Quote
+              </button>
+            </div>
+          </article>
+        }
+      </section>
+    }
+  }
+</div>
+
+

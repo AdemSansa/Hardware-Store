@@ -1,0 +1,318 @@
+// Hardware Store Home Page Styles
+
+* {
+  box-sizing: border-box;
+}
+
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5e6d3 0%, #e8d5b7 50%, #d4c4a8 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+// Header
+.header {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-icon {
+  font-size: 2rem;
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  color: #8b6f47;
+  margin: 0;
+  font-weight: 600;
+}
+
+.nav-section {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.75rem 1.5rem;
+  background: #b8860b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+
+  &:hover {
+    background: #a0750a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+  }
+
+  &.logout-btn {
+    background: #c85a5a;
+
+    &:hover {
+      background: #b04545;
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// Welcome Section
+.welcome-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+}
+
+.welcome-card {
+  text-align: center;
+}
+
+.welcome-card h2 {
+  font-size: 2.5rem;
+  color: #8b6f47;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.user-greeting {
+  font-size: 1.25rem;
+  color: #6b5d4f;
+  margin: 0.5rem 0;
+
+  strong {
+    color: #b8860b;
+  }
+}
+
+.welcome-text {
+  font-size: 1.1rem;
+  color: #6b5d4f;
+  margin: 0;
+  line-height: 1.6;
+}
+
+// Actions Section
+.actions-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+}
+
+.actions-section h3 {
+  font-size: 1.75rem;
+  color: #5a4a3a;
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.action-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.action-card {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  border: 2px solid #e8d5b7;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(184, 134, 11, 0.2);
+    border-color: #b8860b;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    color: #5a4a3a;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #6b5d4f;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .card-arrow {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #b8860b;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  &:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+// Stats Section
+.stats-section {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+}
+
+.stats-section h3 {
+  font-size: 1.75rem;
+  color: #5a4a3a;
+  margin: 0 0 1.5rem;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f5e6d3 0%, #e8d5b7 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.2);
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .stat-content {
+    flex: 1;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #6b5d4f;
+    margin: 0 0 0.25rem;
+    font-weight: 500;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    color: #8b6f47;
+    margin: 0;
+    font-weight: 600;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .home-wrapper {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-section {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    width: 100%;
+  }
+
+  .welcome-card h2 {
+    font-size: 2rem;
+  }
+
+  .action-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-card h2 {
+    font-size: 1.75rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-card,
+  .welcome-section,
+  .actions-section,
+  .stats-section {
+    padding: 1.5rem;
+  }
+}
+

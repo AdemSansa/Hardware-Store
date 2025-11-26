@@ -20,7 +20,30 @@ export class AuthService {
   private userSubject = new BehaviorSubject<any>(null);
   public user$ = this.userSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Initialize token from localStorage on service creation
+    this.initializeToken();
+  }
+
+  // Initialize token from localStorage
+  private initializeToken() {
+    const storedToken = localStorage.getItem('accessToken');
+    if (storedToken) {
+      // Verify token is still valid before restoring
+      try {
+        const decoded = jwtDecode<DecodedToken>(storedToken);
+        if (decoded.exp && decoded.exp * 1000 > Date.now()) {
+          this.setAccessToken(storedToken);
+        } else {
+          // Token expired, remove it
+          localStorage.removeItem('accessToken');
+        }
+      } catch (err) {
+        // Invalid token, remove it
+        localStorage.removeItem('accessToken');
+      }
+    }
+  }
 
   // register
   register(payload: { email: string; password: string; fullName: string}) {
@@ -39,24 +62,41 @@ export class AuthService {
       );
   }
 
-  // set access token in memory and update user observable
+  // set access token in memory, localStorage and update user observable
   private setAccessToken(token: string | null) {
     this.accessToken = token;
+    
+    // Persist to localStorage
     if (token) {
+      localStorage.setItem('accessToken', token);
       try {
         const decoded = jwtDecode<DecodedToken>(token);
-        this.userSubject.next({ id: decoded.sub, roles: decoded.roles || [] , raw: decoded});
+        
+        
+        this.userSubject.next({ id: decoded.sub,email: decoded['raw'].email, name: decoded['raw'].name, roles: decoded.roles || [] , raw: decoded, accessToken: token});
       } catch (err) {
         this.userSubject.next(null);
+        localStorage.removeItem('accessToken');
       }
     } else {
+      localStorage.removeItem('accessToken');
       this.userSubject.next(null);
     }
   }
 
   // used by interceptor
   getAccessToken(): string | null {
-    return this.accessToken;
+    // Return from memory first, fallback to localStorage
+    if (this.accessToken) {
+      return this.accessToken;
+    }
+    const storedToken = localStorage.getItem('accessToken');
+    if (storedToken) {
+      // Restore to memory
+      this.accessToken = storedToken;
+      return storedToken;
+    }
+    return null;
   }
 
   // call refresh endpoint (server reads refresh cookie)
@@ -91,12 +131,26 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    // quick check: token present and not expired
-    if (!this.accessToken) return false;
+    // Check memory first, then localStorage
+    const token = this.accessToken || localStorage.getItem('accessToken');
+    if (!token) return false;
+    
     try {
-      const decoded = jwtDecode<DecodedToken>(this.accessToken);
-      return (decoded.exp ? decoded.exp * 1000 > Date.now() : true);
+      const decoded = jwtDecode<DecodedToken>(token);
+      const isValid = decoded.exp ? decoded.exp * 1000 > Date.now() : true;
+      
+      // If token is expired, clean it up
+      if (!isValid) {
+        this.setAccessToken(null);
+      } else if (!this.accessToken) {
+        // Restore valid token to memory
+        this.accessToken = token;
+      }
+      
+      return isValid;
     } catch {
+      // Invalid token, clean it up
+      this.setAccessToken(null);
       return false;
     }
   }

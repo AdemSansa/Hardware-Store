@@ -21,6 +21,7 @@ export class SignInComponent implements OnInit {
   router = inject(Router);
 
   ngOnInit() {
+    console.log(this.auth.isAuthenticated());
     this.initializeForm();
   }
 
@@ -42,8 +43,11 @@ export class SignInComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.isLoading = false;
-          // Navigate to dashboard or home page after successful login
-          this.router.navigate(['/']);
+          localStorage.setItem('accessToken', res.accessToken);
+         
+          
+          // Navigate to home page after successful login
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           this.isLoading = false;

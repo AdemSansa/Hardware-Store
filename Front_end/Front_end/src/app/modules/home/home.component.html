@@ -1,0 +1,113 @@
+<div class="home-container">
+  <div class="home-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <span class="tool-icon">🔧</span>
+          <h1>Hardware Store</h1>
+        </div>
+        <nav class="nav-section">
+          <button class="nav-btn" (click)="goToShowroom()">Showroom</button>
+          <button class="nav-btn" (click)="goToUsers()">Users</button>
+          <button class="nav-btn" (click)="goToProducts()">Products</button>
+          <button class="nav-btn logout-btn" (click)="logout()">Logout</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Welcome Section -->
+      <section class="welcome-section">
+        <div class="welcome-card">
+          <h2>Welcome Back!</h2>
+          @if (currentUser) {
+            <p class="user-greeting">Hello, <strong>{{ currentUser.name}}</strong></p>
+          }
+          <p class="welcome-text">Manage your hardware store operations from here.</p>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="actions-section">
+        <h3>Quick Actions</h3>
+        <div class="action-cards">
+          <div class="action-card" (click)="goToShowroom()">
+            <div class="card-icon">🏬</div>
+            <h4>Product Showroom</h4>
+            <p>Browse products as your clients will see them</p>
+            <span class="card-arrow">→</span>
+          </div>
+
+          <div class="action-card" (click)="goToUsers()">
+            <div class="card-icon">👥</div>
+            <h4>User Management</h4>
+            <p>View, create, edit, and manage users</p>
+            <span class="card-arrow">→</span>
+          </div>
+
+          <div class="action-card" (click)="goToProducts()">
+            <div class="card-icon">📦</div>
+            <h4>Products</h4>
+            <p>Manage your inventory and products</p>
+            <span class="card-arrow">→</span>
+          </div>
+          
+          <div class="action-card">
+            <div class="card-icon">📊</div>
+            <h4>Reports</h4>
+            <p>View sales and analytics reports</p>
+            <span class="card-arrow">→</span>
+          </div>
+          
+          <div class="action-card">
+            <div class="card-icon">⚙️</div>
+            <h4>Settings</h4>
+            <p>Configure store settings</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <h3>Store Overview</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <p class="stat-label">Total Users</p>
+              <p class="stat-value">-</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-content">
+              <p class="stat-label">Products</p>
+              <p class="stat-value">-</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-content">
+              <p class="stat-label">Verified Users</p>
+              <p class="stat-value">-</p>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">🔄</div>
+            <div class="stat-content">
+              <p class="stat-label">Active Sessions</p>
+              <p class="stat-value">-</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+

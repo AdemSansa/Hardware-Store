@@ -1,0 +1,132 @@
+<div class="product-form-container">
+  <div class="product-form-wrapper">
+    <div class="header">
+      <div class="title-section">
+        <span class="tool-icon">📦</span>
+        <h1>{{ isEditMode ? 'Edit Product' : 'Create Product' }}</h1>
+      </div>
+      <button class="back-btn" (click)="cancel()">← Back to List</button>
+    </div>
+
+    @if (successMessage) {
+      <div class="success-message-box">
+        <span class="success-icon">✓</span>
+        <span>{{ successMessage }}</span>
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="error-message-box">
+        <span class="error-icon">⚠️</span>
+        <span>{{ errorMessage }}</span>
+      </div>
+    }
+
+    @if (isLoading && isEditMode) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading product...</p>
+      </div>
+    }
+
+    @if (!isLoading || !isEditMode) {
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Product Name *</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              [class.error]="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+              placeholder="e.g., Cordless Drill">
+            @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+              <span class="error-text">
+                @if (productForm.get('name')?.errors?.['required']) { Name is required }
+                @if (productForm.get('name')?.errors?.['minlength']) { Name must be at least 3 characters }
+              </span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="sku">SKU</label>
+            <input
+              id="sku"
+              type="text"
+              formControlName="sku"
+              placeholder="e.g., DRL-001">
+          </div>
+
+          <div class="form-field">
+            <label for="category">Category</label>
+            <input
+              id="category"
+              type="text"
+              formControlName="category"
+              placeholder="e.g., Power Tools">
+          </div>
+
+          <div class="form-field">
+            <label for="price">Price *</label>
+            <input
+              id="price"
+              type="number"
+              step="0.01"
+              min="0"
+              formControlName="price"
+              [class.error]="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+              placeholder="0.00">
+            @if (productForm.get('price')?.invalid && productForm.get('price')?.touched) {
+              <span class="error-text">
+                @if (productForm.get('price')?.errors?.['required']) { Price is required }
+                @if (productForm.get('price')?.errors?.['min']) { Price must be positive }
+              </span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="stock">Stock *</label>
+            <input
+              id="stock"
+              type="number"
+              min="0"
+              formControlName="stock"
+              [class.error]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
+              placeholder="0">
+            @if (productForm.get('stock')?.invalid && productForm.get('stock')?.touched) {
+              <span class="error-text">
+                @if (productForm.get('stock')?.errors?.['required']) { Stock is required }
+                @if (productForm.get('stock')?.errors?.['min']) { Stock must be positive }
+              </span>
+            }
+          </div>
+
+          <div class="form-field checkbox-field">
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="isActive">
+              <span>Available for sale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            rows="4"
+            formControlName="description"
+            placeholder="Add more details about the product..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="cancel()">Cancel</button>
+          <button type="submit" class="btn-primary" [disabled]="productForm.invalid || isLoading">
+            @if (!isLoading) { {{ isEditMode ? 'Update Product' : 'Create Product' }} }
+            @if (isLoading) { {{ isEditMode ? 'Updating...' : 'Creating...' }} }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
+

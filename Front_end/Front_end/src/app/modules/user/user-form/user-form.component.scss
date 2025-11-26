@@ -1,0 +1,303 @@
+// Hardware Store User Form Styles
+
+* {
+  box-sizing: border-box;
+}
+
+.user-form-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5e6d3 0%, #e8d5b7 50%, #d4c4a8 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+}
+
+// Header
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-icon {
+  font-size: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #8b6f47;
+  margin: 0;
+  font-weight: 600;
+}
+
+.back-btn {
+  padding: 0.5rem 1rem;
+  background: #e8d5b7;
+  color: #8b6f47;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+
+  &:hover {
+    background: #d4c4a8;
+  }
+}
+
+// Messages
+.success-message-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.success-icon {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.error-message-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #c85a5a;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-icon {
+  font-size: 1.1rem;
+}
+
+// Loading State
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e8d5b7;
+  border-top: 4px solid #b8860b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Form
+.user-form {
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  color: #5a4a3a;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d4c4a8;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #3a3a3a;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #b8860b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+.form-input.error {
+  border-color: #c85a5a;
+  background: #fff5f5;
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+// Error Messages
+.error-text {
+  display: block;
+  color: #c85a5a;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+// Password Strength
+.password-strength {
+  margin-top: 0.5rem;
+  height: 4px;
+  background: #e8d5b7;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.strength-bar.weak {
+  width: 33%;
+  background: #c85a5a;
+}
+
+.strength-bar.medium {
+  width: 66%;
+  background: #d4a574;
+}
+
+.strength-bar.strong {
+  width: 100%;
+  background: #8b6f47;
+}
+
+// Form Actions
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e8d5b7;
+}
+
+.btn-secondary,
+.btn-primary {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-secondary {
+  background: #e8d5b7;
+  color: #8b6f47;
+
+  &:hover {
+    background: #d4c4a8;
+  }
+}
+
+.btn-primary {
+  background: #b8860b;
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    background: #a0750a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .user-form-container {
+    padding: 1rem;
+  }
+
+  .user-form-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .user-form-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .tool-icon {
+    font-size: 1.5rem;
+  }
+}
+
