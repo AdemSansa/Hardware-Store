@@ -53,19 +53,12 @@
             <p>Manage your inventory and products</p>
             <span class="card-arrow">→</span>
           </div>
-          
-          <div class="action-card">
-            <div class="card-icon">📊</div>
-            <h4>Reports</h4>
-            <p>View sales and analytics reports</p>
-            <span class="card-arrow">→</span>
-          </div>
-          
-          <div class="action-card">
-            <div class="card-icon">⚙️</div>
-            <h4>Settings</h4>
-            <p>Configure store settings</p>
-            <span class="card-arrow">→</span>
+
+          <div class="action-card" (click)="downloadBlankInvoice()">
+            <div class="card-icon">📄</div>
+            <h4>Generate Empty Invoices</h4>
+            <p>Choose invoice number range and download all as one PDF</p>
+            <span class="card-arrow">↓</span>
           </div>
         </div>
       </section>
